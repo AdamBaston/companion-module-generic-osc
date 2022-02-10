@@ -234,7 +234,10 @@ instance.prototype.action = function(action) {
 	}
 
 	if (args !== null) {
-		self.debug('Sending OSC',self.config.host, self.config.port, action.options.path);
+		var path;
+		self.parseVariables(action.options.path, function(value){path = value});
+		
+		self.debug('Sending OSC',self.config.host, self.config.port, path);
 		self.oscSend(self.config.host, self.config.port, action.options.path, args);
 	}
 
